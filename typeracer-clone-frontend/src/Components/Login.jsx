@@ -1,6 +1,5 @@
-import { Box, Button, Card, CardBody, grommet, Grommet, TextInput } from 'grommet';
-import { User } from 'grommet-icons';
 import { useEffect } from 'react';
+import styles from "../styles/Login.module.scss"
 
 function Login({ user, setUser, setIsLoggedIn, socketRef }) {
     //Enabling Enter to submit
@@ -22,46 +21,26 @@ function Login({ user, setUser, setIsLoggedIn, socketRef }) {
     }
 
     return (
-        <Grommet theme={grommet}>
-            <Box
-                align="center"
-                justify="center"
-                height="100vh"
-            >
-                <Card
-                    height="medium"
-                    width="medium"
-                    background="light-1"
-                    align="center"
+        <div className={styles.loginContainer}>
+            <div className={styles.loginCard}>
+                <h1>typeracer-clone</h1>
+                <label htmlFor="username">Username</label>
+                <input
+                    type="text"
+                    placeholder="Username"
+                    name="username"
+                    value={user.username}
+                    onChange={e => setUser({ username: e.target.value })}
+                />
+                <button
+                    className="buttonPrimary"
+                    size="medium"
+                    onClick={() => loginUser()}
                 >
-                    <CardBody
-                        direction="column"
-                        align="center"
-                        justify="center"
-                    >
-                        <Box margin={{ "bottom": 'large' }}>
-                            <User
-                                size="xlarge"
-                            />
-                        </Box>
-                        <Box margin={{ 'bottom': 'small' }}>
-                            <TextInput
-                                placeholder="Username"
-                                value={user.username}
-                                onChange={e => setUser({ username: e.target.value })}
-                            />
-                        </Box>
-                        <Button
-                            primary
-                            size="medium"
-                            onClick={() => loginUser()}
-                            label="Login"
-                        >
-                        </Button>
-                    </CardBody>
-                </Card>
-            </Box>
-        </Grommet>
+                    join
+                </button>
+            </div>
+        </div>
     )
 }
 

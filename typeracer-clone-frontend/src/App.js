@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import './App.css';
+import './App.scss';
 import Login from './Components/Login';
 import io from 'socket.io-client';
 import TypingInterface from './Components/TypingInterface';

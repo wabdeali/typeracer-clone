@@ -1,4 +1,3 @@
-import { grommet, Grommet } from 'grommet';
 import React, { useEffect, useRef, useState } from 'react'
 
 function TypingInterface({ socketRef, username }) {
@@ -14,9 +13,7 @@ function TypingInterface({ socketRef, username }) {
     const [correctLettersArray, setCorrectLettersArray] = useState([]);
 
     useEffect(() => {
-        console.log('reached useEffect')
         socketRef.current.on('sentence', sentenceArray => {
-            console.log(sentenceArray)
             setSentenceArray(sentenceArray);
         })
         socketRef.current.on('start', () => {
@@ -72,46 +69,43 @@ function TypingInterface({ socketRef, username }) {
     };
 
     return (
-        <Grommet theme={grommet}>
-            <div className="App">
-                <h1>Test your Typing Speed</h1>
-                <div className="textArea" onClick={() => times.current.startTime ? textInputRef.current.focus() : null}>
-                    {sentenceArray.map((word, wordIndex) => (
-                        <span
-                            key={wordIndex}
-                            className={wordIndex < currentWord ? "correct" : ""}
-                        >
-                            {word.map((letter, letterIndex) => (
-                                <span
-                                    key={letterIndex}
-                                    className={
-                                        wordIndex === currentWord
+        <div className="App">
+            <div className="textArea" onClick={() => times.current.startTime ? textInputRef.current.focus() : null}>
+                {sentenceArray.map((word, wordIndex) => (
+                    <span
+                        key={wordIndex}
+                        className={wordIndex < currentWord ? "correct" : ""}
+                    >
+                        {word.map((letter, letterIndex) => (
+                            <span
+                                key={letterIndex}
+                                className={
+                                    wordIndex === currentWord
+                                        ? correctLettersArray[letterIndex]
                                             ? correctLettersArray[letterIndex]
-                                                ? correctLettersArray[letterIndex]
-                                                : letterIndex === correctLettersArray.length
-                                                    ? "currentLetter"
-                                                    : ""
-                                            : ""
-                                    }
-                                >
-                                    {letter}
-                                </span>
-                            ))}
-                        </span>
-                    ))}
-                </div>
-                <div>
-                    <input
-                        id="textInput"
-                        type="text"
-                        ref={textInputRef}
-                        value={typedWord}
-                        onChange={(e) => newLetter(e)}
-                        style={{ width: "0", opacity: "0" }}
-                    />
-                </div>
+                                            : letterIndex === correctLettersArray.length
+                                                ? "currentLetter"
+                                                : ""
+                                        : ""
+                                }
+                            >
+                                {letter}
+                            </span>
+                        ))}
+                    </span>
+                ))}
             </div>
-        </Grommet>
+            <div style={{ height: 0 }}>
+                <input
+                    id="textInput"
+                    type="text"
+                    ref={textInputRef}
+                    value={typedWord}
+                    onChange={(e) => newLetter(e)}
+                    style={{ width: "0", opacity: "0" }}
+                />
+            </div>
+        </div>
     );
 }
 

@@ -12,15 +12,18 @@ function Timer({ socketRef }) {
 
     return (
         <div className={styles.container}>
-            <span className={styles.timer}>
-                {
-                    countdownTimer ?
-                        `${countdownTimer}s`
-                        : isStarted ?
-                            'Start Typing!'
-                            : 'Waiting for other players to join..'
-                }
-            </span>
+            <h1>typeracer-clone</h1>
+            <div className={styles.timerContainer}>
+                <span className={styles.timer}>
+                    {
+                        countdownTimer ?
+                            `${countdownTimer}s`
+                            : isStarted ?
+                                'Start Typing!'
+                                : 'Waiting for other players to join..'
+                    }
+                </span>
+            </div>
         </div>
     )
 }

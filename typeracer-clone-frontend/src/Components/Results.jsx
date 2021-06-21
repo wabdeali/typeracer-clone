@@ -7,21 +7,31 @@ function Results({ socketRef }) {
     useEffect(() => {
         socketRef.current.on('newFinalScore', finalScore => {
             setFinalScores(oldArray => [...oldArray, finalScore]);
-            console.log('finalScores')
         })
     }, [socketRef])
 
+    if (finalScores.length === 0) return null
+
     return (
-        <div className={styles.container}>
-            {
-                finalScores.map((user => (
-                    <div className={styles.card}>
-                        <p>{user.username}</p>
-                        <span>{`${user.finalScore} WPM`}</span>
-                    </div>
-                )))
-            }
-        </div>
+        <>
+            <div className={styles.container}>
+                <h2>RESULTS</h2>
+                <div className={styles.tableContainer}>
+                    {
+                        finalScores.map(((user, index) => (
+                            <div className={styles.row} key={index}>
+                                <p>{index + 1}</p>
+                                <p className={styles.username}>{user.username}</p>
+                                <p className={styles.score}>{`${user.finalScore} WPM`}</p>
+                            </div>
+                        )))
+                    }
+                </div>
+            </div>
+            <div className={styles.buttonContainer}>
+                <button className="buttonPrimary" onClick={() => window.location.reload()}>Play again</button>
+            </div>
+        </>
     )
 }
 

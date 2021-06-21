@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styles from '../styles/Status.module.scss'
-import Results from './Results';
 
 function Status({ socketRef }) {
     const [activeUsers, setActiveUsers] = useState([]);
@@ -11,7 +10,9 @@ function Status({ socketRef }) {
             setActiveUsers(activeUsers);
         });
         socketRef.current.on('scoreUpdate', (newScore) => {
-            setScore(newScore);
+            // const mergedScore = { ...score, ...newScore }
+            // setScore(mergedScore);
+            setScore(newScore)
         });
     })
 
@@ -31,9 +32,6 @@ function Status({ socketRef }) {
                         <span className={styles.progressBar}>
                             <span className={styles.progress} style={{ width: score && score[user.username] ? getWidthPercentage(user) : '' }}>
                             </span>
-                        </span>
-                        <span className={styles.percentage}>
-                            {score && score[user.username] ? getWidthPercentage(user) : ''}
                         </span>
                     </div>
                 ))

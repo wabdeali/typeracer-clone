@@ -1,10 +1,25 @@
+@import "./variables";
+
 .container {
-    text-align: center;
-    margin: 30px;
+    margin: 10px 200px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.timerContainer {
+    background-color: $darker;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    min-width: 72px;
 }
 
 .timer {
-    font-size: 1.5em;
-    color: rgb(53, 53, 53);
-    letter-spacing: 0.1em;
+    font-weight: 500;
+    font-size: 1em;
+    color: $primary;
+    letter-spacing: 1.5px;
 }
