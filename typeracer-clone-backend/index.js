@@ -38,8 +38,8 @@ io.on('connection', socket => {
 
         socket.on('finalScore', finalScore => {
             io.emit('newFinalScore', finalScore);
+            // socket.disconnect()
         });
-
     });
     socket.on('disconnect', () => {
         activeUsers.forEach((user, index) => {
